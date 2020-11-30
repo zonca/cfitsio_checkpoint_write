@@ -42,7 +42,7 @@ int main()
     int tfields   = 3;       /* table will have 3 columns */
     long nrows    = 6;       /* table will have 6 rows    */
 
-    char filename[] = "atestfil.fits";           /* name for new FITS file */
+    char filename[] = "test_cube.fits";           /* name for new FITS file */
     char extname[] = "PLANETS_Binary";           /* extension name */
 
     /* define the name, datatype, and physical units for the 3 columns */
