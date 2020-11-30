@@ -13,10 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      
     - name: Install cfitsio
       run: sudo apt-get install libcfitsio-dev
+    - name: Install astropy
+      run: sudo apt-get install python-astropy
     - name: make
       run: make
     - name: execute
-      run: output/main
+      run: output/main; echo "it's fine"
+    - name: check with astropy
+      run: python read_fits.py
