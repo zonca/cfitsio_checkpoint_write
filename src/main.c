@@ -94,7 +94,7 @@ int main()
     nelements = xsize * ysize;          /* number of pixels to write */
 
     /* write the array of unsigned integers to the FITS file */
-    for (kk = 0; kk < 10; kk++) {
+    for (kk = 0; kk < num_readouts_written; kk++) {
         fpixel[0] = 1;    /* first pixel to write      */
         fpixel[1] = 1;
         fpixel[2] = kk + 1;
@@ -118,7 +118,6 @@ int main()
 
     if ( fits_close_file(fptr, &status) )       /* close the FITS file */
          printerror( status );
-    return;
 
     return (0);
 }
