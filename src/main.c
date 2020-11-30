@@ -109,6 +109,10 @@ int main()
             }
         }
     }
+    if ( fits_flush_file(fptr, &status) )
+        printerror( status );
+    *(int*)0 = 0;
+
     free( readout[0] );  /* free previously allocated memory */
 
 
