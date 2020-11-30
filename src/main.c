@@ -39,20 +39,20 @@ int main()
     char filename[] = "test_cube.fits";           /* name for new FITS file */
     int status, ii, jj, hdutype;
     long  fpixel, nelements;
-    unsigned short *array[200];
+    unsigned int *readout[600];
 
     /* initialize FITS image parameters */
-    int bitpix   =  USHORT_IMG; /* 16-bit unsigned short pixel values       */
-    long naxis    =   2;  /* 2-dimensional image                            */    
-    long naxes[2] = { 300, 200 };   /* image is 300 pixels wide by 200 rows */
+    int bitpix   =  ULONG_IMG; /* 32-bit unsigned short pixel values       */
+    long naxis    =   3;  /* 3-dimensional image                            */
+	long naxes[3] = { 500, 30, 20 };   /* image is 300 pixels wide by 200 rows */
 
     /* allocate memory for the whole image */ 
-    array[0] = (unsigned short *)malloc( naxes[0] * naxes[1]
-                                        * sizeof( unsigned short ) );
+    readout[0] = (unsigned int *)malloc( naxes[0] * naxes[1]
+                                        * sizeof( unsigned int ) );
 
     /* initialize pointers to the start of each row of the image */
     for( ii=1; ii<naxes[1]; ii++ )
-      array[ii] = array[ii-1] + naxes[0];
+      readout[ii] = readout[ii-1] + naxes[0];
 
     remove(filename);               /* Delete old file if it already exists */
 
@@ -81,7 +81,7 @@ int main()
     for (jj = 0; jj < naxes[1]; jj++)
     {   for (ii = 0; ii < naxes[0]; ii++)
         {
-            array[jj][ii] = ii + jj;
+            readout[jj][ii] = ii + jj;
         }
     }
 
@@ -89,10 +89,10 @@ int main()
     nelements = naxes[0] * naxes[1];          /* number of pixels to write */
 
     /* write the array of unsigned integers to the FITS file */
-    if ( fits_write_img(fptr, TUSHORT, fpixel, nelements, array[0], &status) )
+    if ( fits_write_img(fptr, TUINT, fpixel, nelements, readout[0], &status) )
         printerror( status );
       
-    free( array[0] );  /* free previously allocated memory */
+    free( readout[0] );  /* free previously allocated memory */
 
     if ( fits_close_file(fptr, &status) )       /* close the FITS file */
          printerror( status );
