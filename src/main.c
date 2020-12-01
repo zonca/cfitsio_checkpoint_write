@@ -47,16 +47,12 @@ int main()
     static long xsize = 700;
     static long ysize = 800;
     long naxes[3] = { xsize, ysize, num_readouts };
-    unsigned int *readout[xsize*ysize];
+    int readout[ysize][xsize];
 
     long num_readouts_written = 10;
     /* allocate memory for the whole image */
-    readout[0] = (unsigned int *)malloc( naxes[0] * naxes[1]
-                                        * sizeof( unsigned int ) );
-
-    /* initialize pointers to the start of each row of the image */
-    for( ii=1; ii<naxes[1]; ii++ )
-      readout[ii] = readout[ii-1] + naxes[0];
+    // readout[0] = (unsigned int *)malloc( naxes[0] * naxes[1]
+    //                                    * sizeof( unsigned int ) );
 
     remove(filename);               /* Delete old file if it already exists */
 
@@ -66,8 +62,7 @@ int main()
          printerror( status );           /* call printerror if error occurs */
 
     create_empty_hdu(fptr);
-
-    if ( fits_movabs_hdu(fptr, 1, &hdutype, &status) ) /* move to 2nd HDU */
+    if ( fits_movabs_hdu(fptr, 1, &hdutype, &status) ) /* move to 1nd HDU */
          printerror( status );
 
     /* write the required keywords for the primary array image.     */
@@ -117,7 +112,7 @@ int main()
         printerror( status );
     *(int*)0 = 0;
 
-    free( readout[0] );  /* free previously allocated memory */
+    //free( readout[0] );  /* free previously allocated memory */
 
 
     if ( fits_close_file(fptr, &status) )       /* close the FITS file */
