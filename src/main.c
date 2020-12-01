@@ -108,8 +108,12 @@ int main()
                 readout[jj][ii] += 10000;
             }
         }
+        if (kk == 0) {
+            if ( fits_flush_file(fptr, &status) ) // first time we need to flush_file
+                printerror( status );
+        }
     }
-    if ( fits_flush_file(fptr, &status) )
+    if ( fits_flush_buffer(fptr, 0, &status) )  // flush buffer is a lot quicker
         printerror( status );
     *(int*)0 = 0;
 
