@@ -44,8 +44,8 @@ int main()
     int bitpix   =  ULONG_IMG; /* 32-bit unsigned short pixel values       */
     long naxis    =   3;  /* 3-dimensional image                            */
     static long num_readouts = 500;
-    static long xsize = 20;
-    static long ysize = 30;
+    static long xsize = 700;
+    static long ysize = 800;
     long naxes[3] = { xsize, ysize, num_readouts };
     unsigned int *readout[xsize*ysize];
 
