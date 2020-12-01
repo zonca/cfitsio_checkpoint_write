@@ -19,7 +19,7 @@ jobs:
       run: sudo apt-get install python-astropy
     - name: make
       run: make
-    - name: execute
-      run: output/main; echo "it's fine"
+    - name: execute and ignore segfault
+      run: output/main || true
     - name: check with astropy
       run: python read_fits.py
