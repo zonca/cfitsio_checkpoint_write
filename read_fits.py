@@ -3,7 +3,7 @@ import numpy as np
 
 filename = "test_cube.fits"
 
-readout_shape = (30,20)
+readout_shape = (800,700)
 num_readouts = 500
 with fits.open(filename) as f:
     print("shape", f[1].data.shape)
